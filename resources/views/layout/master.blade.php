@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('admin_template/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
     <link rel="stylesheet" href="{{ asset('admin_template/plugins/jqvmap/jqvmap.min.css') }}">
+    <!--font-awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin_template/dist/css/adminlte.min.css') }}">
     <!-- overlayScrollbars -->
@@ -28,8 +30,11 @@
     <link rel="stylesheet" href="{{ asset('admin_template/plugins/summernote/summernote-bs4.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-     <!-- Toastr -->
-     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('admin_template/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -44,7 +49,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{route('home')}}" class="nav-link">Home</a>
+                    <a href="{{ route('home') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -66,8 +71,8 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                 {{-- logout start --}}
-                 <li class="nav-item mr-2">
+                {{-- logout start --}}
+                <li class="nav-item mr-2">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <input class="btn btn-danger btn-sm" type="submit" value="LogOut"
@@ -136,6 +141,20 @@
     {{-- toster --}}
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <!-- DataTables start -->
+    <script src="{{ asset('admin_template/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin_template/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin_template/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('admin_template/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script>
+        $(function() {
+            $("#dataTable").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+            });
+        });
+    </script>
+    <!-- DataTables end -->
     {!! Toastr::message() !!}
 </body>
 

@@ -55,13 +55,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('nurses.create')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Nurse Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('nurses.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Nurse view</p>
                             </a>
@@ -78,13 +78,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('patients.create')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Patient Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('patients.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Patient view</p>
                             </a>
@@ -101,13 +101,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('pathological-tests.create')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pathological Test Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('pathological-tests.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pathological Test view</p>
                             </a>

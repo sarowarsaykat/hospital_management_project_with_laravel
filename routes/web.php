@@ -3,6 +3,9 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\NurseController;
+use App\Http\Controllers\PathologicalTestController;
+use App\Http\Controllers\PatientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +23,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'handleLogin']);
 Route::middleware(['auth'])->group(function () {
-    Route::get("/",[AdminController::class,"home"])->name("home");
+    Route::get("/", [AdminController::class, "home"])->name("home");
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::resource('doctors', DoctorController::class);
+    Route::resource('nurses', NurseController::class);
+    Route::resource('patients', PatientController::class);
+    Route::resource('pathological-tests', PathologicalTestController::class);
 });
-
-//doctor
-Route::resource('doctors', DoctorController::class);
