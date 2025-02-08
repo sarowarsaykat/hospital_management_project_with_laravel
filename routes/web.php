@@ -2,10 +2,16 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\NurseController;
 use App\Http\Controllers\PathologicalTestController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +35,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('nurses', NurseController::class);
     Route::resource('patients', PatientController::class);
     Route::resource('pathological-tests', PathologicalTestController::class);
+    Route::resource('category',CategoryController::class);
+    Route::resource('sub-categories', SubCategoryController::class);
+    Route::resource('manufacturer',ManufacturerController::class);
+    Route::resource('units', UnitController::class);
+    Route::resource('customers', CustomerController::class);
+    Route::resource('suppliers', SupplierController::class);
 });

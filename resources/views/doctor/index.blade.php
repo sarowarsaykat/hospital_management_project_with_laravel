@@ -9,7 +9,6 @@
                             <h3 class="card-title">Doctor List</h3>
                         </div>
                         <div class="card-body">
-                            
                             <div class="table-responsive">
                                 <a href="{{ route('doctors.create') }}" class="btn btn-primary mb-2">+ Add Doctor</a>
                                 <table class="table table-bordered" id="dataTable">
