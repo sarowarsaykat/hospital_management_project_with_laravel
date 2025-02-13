@@ -46,7 +46,7 @@ class AuthController extends Controller
                 $request->session()->regenerate();
 
                 Toastr::success('Logged in successfully!', 'Success');
-                return redirect()->intended('home');
+                return redirect()->intended('/');
             }
 
             // Password is incorrect

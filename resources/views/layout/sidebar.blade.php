@@ -20,12 +20,12 @@
         </div>
 
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
+        <nav class="mt-2 ">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="fa-solid fa-user-doctor"></i>
                         <p>
                             Doctor
                             <i class="right fas fa-angle-left"></i>
@@ -48,7 +48,7 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="fa-solid fa-user-nurse"></i>
                         <p>
                             Nurse
                             <i class="right fas fa-angle-left"></i>
@@ -71,7 +71,7 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="fa-solid fa-users"></i>
                         <p>
                             Patient
                             <i class="right fas fa-angle-left"></i>
@@ -94,23 +94,46 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                          <i class="fa-solid fa-cart-plus"></i>
                         <p>
-                            Pathological Test
+                            Purchase Medicine
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('pathological-tests.create') }}" class="nav-link">
+                            <a href="{{ route('purchases.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Pathological Test Create</p>
+                                <p>Purchase Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('pathological-tests.index') }}" class="nav-link">
+                            <a href="{{route('purchases.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Pathological Test view</p>
+                                <p>Purchase view</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-cart-arrow-down "></i>
+                        <p>
+                           Medicine Sale
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('sales.create')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sale Create</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('sales.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sale view</p>
                             </a>
                         </li>
                     </ul>
@@ -165,6 +188,32 @@
                     </ul>
                 </li>
                 
+                <!--Medicine Start-->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-capsules"></i>
+                        <p>
+                            Medicine
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('medicines.create') }}" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Add Medicine</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('medicines.index') }}" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>View Medicine</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--Medicine End-->
+
                 <!--Configuration start-->
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link">
@@ -174,6 +223,31 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Pathological Test
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('pathological-tests.create') }}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Add Pathological Test</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('pathological-tests.index') }}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>View Pathological Test</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
