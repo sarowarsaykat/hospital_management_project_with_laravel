@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->integer('sales_master_id');
             $table->integer('medicine_id');
-            $table->decimal('purchase_price', 15, 2)->nullable();
+            $table->decimal('purchase_price', 15, 2);
             $table->decimal('sale_price', 15, 2);
             $table->decimal('quantity', 10, 2);
             $table->decimal('total', 15, 2);
-            $table->string('unit');
+	        $table->string('unit');
             $table->integer('stock');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();

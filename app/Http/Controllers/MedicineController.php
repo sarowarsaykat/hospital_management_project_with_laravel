@@ -199,4 +199,19 @@ class MedicineController extends Controller
             return redirect()->back();
         }
     }
+    public function getMedicineDetails($id)
+    {
+        $medicine = Medicine::find($id);
+
+        if ($medicine) {
+            return response()->json([
+                'unit_name' => optional($medicine->unit)->name, // Avoid error if unit is null
+                'purchase_price' => $medicine->purchase_price,
+                'sale_price' => $medicine->sale_price,
+                'stock' => $medicine->stock,
+            ]);
+        } else {
+            return response()->json(['error' => 'Medicine not found'], 404);
+        }
+    }
 }

@@ -13,6 +13,8 @@
                             <div class="container">
                                 <form action="{{ route('sales.store') }}" method="POST">
                                     @csrf
+
+                                    <!-- Customer and Sale Date -->
                                     <div class="row mb-3">
                                         <div class="col-md-4">
                                             <label for="customer_id">Customer</label>
@@ -30,9 +32,11 @@
                                         </div>
                                     </div>
 
+                                    <!-- Sales Table -->
                                     <div>
                                         <h4>Sale Items</h4>
-                                        <button id="add-row-btn" type="button" class="btn btn-primary mb-2">Add Medicine</button>
+                                        <button id="add-row-btn" type="button" class="btn btn-primary mb-2">Add
+                                            Medicine</button>
                                         <table id="sales-table" class="table table-bordered">
                                             <thead>
                                                 <tr>
@@ -46,37 +50,71 @@
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody></tbody>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="form-control medicine-select" name="medicine_id[]"
+                                                            required>
+                                                            <option value="" disabled selected>Select a medicine
+                                                            </option>
+                                                            @foreach ($medicines as $medicine)
+                                                                <option value="{{ $medicine->id }}">{{ $medicine->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td><input type="text" name="unit[]" class="form-control" readonly>
+                                                    </td>
+                                                    <td><input type="number" name="purchase_price[]" class="form-control"
+                                                            readonly></td>
+                                                    <td><input type="number" name="sale_price[]" class="form-control"
+                                                            readonly></td>
+                                                    <td><input type="number" name="quantity[]" class="form-control"></td>
+                                                    <td><input type="number" name="stock[]" class="form-control" readonly>
+                                                    </td>
+                                                    <td><input type="number" name="total[]" class="form-control" readonly>
+                                                    </td>
+                                                    <td><button type="button"
+                                                            class="btn btn-danger delete-row-btn">Delete</button></td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                     </div>
 
+                                    <!-- Total Quantity and Amount -->
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label>Total Quantity</label>
-                                            <input type="number" id="total_quantity" name="total_quantity" class="form-control" readonly>
+                                            <input type="number" id="total_quantity" name="total_quantity"
+                                                class="form-control" readonly>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Total Amount</label>
-                                            <input type="number" id="total_amount" name="total_amount" class="form-control" readonly>
+                                            <input type="number" id="total_amount" name="total_amount" class="form-control"
+                                                readonly>
                                         </div>
                                     </div>
 
+                                    <!-- Payment Details -->
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label>Payment Method</label>
                                             <select id="payment_method" name="payment_method" class="form-control" required>
                                                 <option value="" disabled selected>Select a method</option>
-                                                <option value="Bkash">Bkash</option>
-                                                <option value="Nagad">Nagad</option>
-                                                <option value="Rocket">Rocket</option>
+                                                <option value="cash">Cash</option>
+                                                <option value="bkash">Bkash</option>
+                                                <option value="nagad">Nagad</option>
+                                                <option value="rocket">Rocket</option>
                                             </select>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Payment</label>
-                                            <input type="number" id="payment" name="payment" class="form-control" required>
+                                            <input type="number" id="payment" name="payment" class="form-control"
+                                                required>
                                         </div>
                                     </div>
 
+                                    <!-- Submit Button -->
                                     <div class="mt-4">
                                         <button type="submit" class="btn btn-success">Save</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
@@ -92,72 +130,81 @@
 @endsection
 
 @push('js-content')
-    <script>
-        $(document).ready(function() {
-            $('#add-row-btn').click(function() {
-                let newRow = `<tr>
-                    <td>
-                        <select class="form-control medicine-select" name="medicine_id[]" required>
-                            <option value="" disabled selected>Select a medicine</option>
-                            @foreach ($medicines as $medicine)
-                                <option value="{{ $medicine->id }}" 
-                                    data-unit="{{ $medicine->unit->name }}" 
-                                    data-purchase-price="{{ $medicine->purchase_price }}" 
-                                    data-sale-price="{{ $medicine->sale_price }}" 
-                                    data-stock="{{ $medicine->stock }}">
-                                    {{ $medicine->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td><input type="text" name="unit[]" class="form-control unit-name" readonly></td>
-                    <td><input type="number" name="purchase_price[]" class="form-control purchase-price" readonly></td>
-                    <td><input type="number" name="sale_price[]" class="form-control sale-price" readonly></td>
-                    <td><input type="number" name="quantity[]" class="form-control quantity"></td>
-                    <td><input type="number" name="stock[]" class="form-control stock" readonly></td>
-                    <td><input type="number" name="total[]" class="form-control total" readonly></td>
-                    <td><button type="button" class="btn btn-danger delete-row-btn">Delete</button></td>
-                </tr>`;
-                $('#sales-table tbody').append(newRow);
-            });
+<script>
+    $(document).ready(function() {
+        // Add a new row
+        $('#add-row-btn').click(function() {
+            const newRow = `
+            <tr>
+                <td>
+                    <select class="form-control medicine-select" name="medicine_id[]" required>
+                        <option value="" disabled selected>Select a medicine</option>
+                        @foreach ($medicines as $medicine)
+                            <option value="{{ $medicine->id }}">{{ $medicine->name }}</option>
+                        @endforeach
+                    </select>
+                </td>
+                <td><input type="text" name="unit[]" class="form-control" readonly></td>
+                <td><input type="number" name="purchase_price[]" class="form-control" readonly></td>
+                <td><input type="number" name="sale_price[]" class="form-control" readonly></td>
+                <td><input type="number" name="quantity[]" class="form-control"></td>
+                <td><input type="number" name="stock[]" class="form-control" readonly></td>
+                <td><input type="number" name="total[]" class="form-control" readonly></td>
+                <td><button type="button" class="btn btn-danger delete-row-btn">Delete</button></td>
+            </tr>`;
+            $('#sales-table tbody').append(newRow);
+        });
 
-            $(document).on('change', '.medicine-select', function() {
-                let selected = $(this).find(':selected');
-                let row = $(this).closest('tr');
-                row.find('.unit-name').val(selected.data('unit'));
-                row.find('.purchase-price').val(selected.data('purchase-price'));
-                row.find('.sale-price').val(selected.data('sale-price'));
-                row.find('.stock').val(selected.data('stock'));
-                row.find('.quantity').val(1);
-                row.find('.total').val(selected.data('sale-price'));
-                calculateTotals();
-            });
+        // Fetch medicine details via AJAX
+        $(document).on('change', '.medicine-select', function() {
+            const medicineId = $(this).val();
+            const $row = $(this).closest('tr');
 
-            $(document).on('input', '.quantity', function() {
-                let row = $(this).closest('tr');
-                let quantity = parseFloat(row.find('.quantity').val()) || 0;
-                let price = parseFloat(row.find('.sale-price').val()) || 0;
-                row.find('.total').val((quantity * price).toFixed(2));
-                calculateTotals();
-            });
-
-            $(document).on('click', '.delete-row-btn', function() {
-                $(this).closest('tr').remove();
-                calculateTotals();
-            });
-
-            function calculateTotals() {
-                let totalQuantity = 0,
-                    totalAmount = 0;
-
-                $('#sales-table tbody tr').each(function() {
-                    totalQuantity += parseFloat($(this).find('.quantity').val()) || 0;
-                    totalAmount += parseFloat($(this).find('.total').val()) || 0;
+            if (medicineId) {
+                $.ajax({
+                    url: `/medicine-details/${medicineId}`, // Endpoint to fetch medicine details
+                    method: 'GET',
+                    success: function(data) {
+                        $row.find('input[name="unit[]"]').val(data.unit_name || 'N/A'); 
+                        $row.find('input[name="purchase_price[]"]').val(data.purchase_price);
+                        $row.find('input[name="sale_price[]"]').val(data.sale_price);
+                        $row.find('input[name="stock[]"]').val(data.stock);
+                    },
+                    error: function() {
+                        alert('Error fetching medicine details.');
+                    }
                 });
-
-                $('#total_quantity').val(totalQuantity);
-                $('#total_amount').val(totalAmount.toFixed(2));
             }
         });
-    </script>
+
+        // Delete a row
+        $(document).on('click', '.delete-row-btn', function() {
+            $(this).closest('tr').remove();
+            calculateTotals(); // Recalculate totals when row is deleted
+        });
+
+        // Calculate totals
+        function calculateTotals() {
+            let totalQuantity = 0;
+            let totalAmount = 0;
+
+            $('#sales-table tbody tr').each(function() {
+                const quantity = parseFloat($(this).find('input[name="quantity[]"]').val()) || 0;
+                const salePrice = parseFloat($(this).find('input[name="sale_price[]"]').val()) || 0;
+                const total = quantity * salePrice;
+
+                $(this).find('input[name="total[]"]').val(total.toFixed(2));
+                totalQuantity += quantity;
+                totalAmount += total;
+            });
+
+            $('#total_quantity').val(totalQuantity);
+            $('#total_amount').val(totalAmount.toFixed(2));
+        }
+
+        // Update totals on quantity change
+        $(document).on('input', 'input[name="quantity[]"]', calculateTotals);
+    });
+</script>
 @endpush
+

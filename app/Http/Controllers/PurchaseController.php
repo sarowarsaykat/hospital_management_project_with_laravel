@@ -39,6 +39,7 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate the incoming data
         $validator = Validator::make($request->all(), [
             'supplier_id' => 'required|exists:suppliers,id',
             'purchase_date' => 'required|date',
@@ -48,6 +49,7 @@ class PurchaseController extends Controller
             'quantity.*' => 'required|numeric|min:1',
         ]);
 
+        // If validation fails, return with errors
         if ($validator->fails()) {
             foreach ($validator->messages()->all() as $message) {
                 Toastr::error($message, 'Failed');
@@ -55,39 +57,44 @@ class PurchaseController extends Controller
             return back()->withInput();
         }
 
+        // Creating the Purchase Master entry
         $purchaseMaster = new PurchaseMaster();
         $purchaseMaster->supplier_id = $request->supplier_id;
         $purchaseMaster->purchase_date = $request->purchase_date;
-        $purchaseMaster->total_quantity = array_sum($request->quantity);
-        $purchaseMaster->total_amount = array_sum(array_map(function ($quantity, $price) {
-            return $quantity * $price;
-        }, $request->quantity, $request->purchase_price));
+        $purchaseMaster->total_quantity = array_sum($request->quantity);  // Total quantity calculation
+        $purchaseMaster->total_amount = collect($request->quantity)
+            ->zip($request->purchase_price)
+            ->sum(function ($item) {
+                return $item[0] * $item[1];  // Total amount calculation for each purchase item
+            });
         $purchaseMaster->created_by = auth()->id();
         $purchaseMaster->save();
-        // dd( $request);
-        // exit;
 
+        // Loop through each medicine and create a purchase detail entry
         foreach ($request->medicine_id as $index => $medicineId) {
+            // Create Purchase Detail entry
             $details = new PurchaseDetails();
             $details->purchase_master_id = $purchaseMaster->id;
             $details->medicine_id = $medicineId;
             $details->unit_id = $request->unit_id[$index];
             $details->purchase_price = $request->purchase_price[$index];
             $details->quantity = $request->quantity[$index];
-            $details->total = $details->purchase_price * $details->quantity;
+            $details->total = $details->purchase_price * $details->quantity;  // Total for this purchase item
             $details->save();
 
             // **Medicine Stock Update**
             $medicine = Medicine::find($medicineId);
             if ($medicine) {
-                $medicine->stock += $request->quantity[$index];
-                $medicine->save();
+                $medicine->stock += $request->quantity[$index];  // Increase the stock
+                $medicine->save();  // Save the updated stock in the database
             }
         }
 
-        Toastr::success('Success', 'Purchase created successfully!');
+        // Display success message and redirect to the purchases index page
+        Toastr::success('Purchase created successfully!');
         return redirect()->route('purchases.index');
     }
+
 
 
     /**

@@ -47,4 +47,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('medicines', MedicineController::class);
     Route::resource('purchases', PurchaseController::class);
     Route::resource('sales', SalesController::class); 
+    Route::get('/medicine-details/{id}', [MedicineController::class, 'getMedicineDetails']);
+
 });
