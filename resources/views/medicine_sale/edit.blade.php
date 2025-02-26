@@ -58,8 +58,8 @@
                                                 @foreach ($salesDetails as $detail)
                                                     <tr>
                                                         <td>
-                                                            <select class="form-control medicine-select" name="medicine_id[]"
-                                                                required>
+                                                            <select class="form-control medicine-select"
+                                                                name="medicine_id[]" required>
                                                                 <option value="" disabled>Select a medicine
                                                                 </option>
                                                                 @foreach ($medicines as $medicine)

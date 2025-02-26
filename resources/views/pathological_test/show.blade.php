@@ -22,7 +22,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p><strong>Price:</strong> ${{ number_format($test->price, 2) }}</p>
+                                        <p><strong>Price:</strong> {{ number_format($test->price, 2) }} Tk</p>
                                     </div>
                                     <div class="col-md-6">
                                         <p><strong>Status:</strong> 
@@ -38,12 +38,12 @@
                                     <p>{{ $test->description ?? 'N/A' }}</p>
                                 </div>
 
-                                <a href="{{ route('pathological-tests.index') }}" class="btn btn-secondary">Back</a>
-                                <a href="{{ route('pathological-tests.edit', $test->id) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('pathological-tests.index') }}" class="btn btn-secondary btn-sm">Back</a>
+                                <a href="{{ route('pathological-tests.edit', $test->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                 <form action="{{ route('pathological-tests.destroy', $test->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                             </div>
                         </div>

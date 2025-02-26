@@ -14,6 +14,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TestSalesController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,5 +49,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('purchases', PurchaseController::class);
     Route::resource('sales', SalesController::class); 
     Route::get('/medicine-details/{id}', [MedicineController::class, 'getMedicineDetails']);
+    Route::resource('test-sales', TestSalesController::class);
+    Route::get('/test-details/{id}', [PathologicalTestController::class, 'getTestDetails']);
+    
 
 });

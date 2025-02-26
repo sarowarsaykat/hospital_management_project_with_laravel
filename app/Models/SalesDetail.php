@@ -14,7 +14,6 @@ class SalesDetail extends Model
         return $this->belongsTo(SalesMaster::class);
     }
 
-    
     public function medicine()
     {
         return $this->belongsTo(Medicine::class);

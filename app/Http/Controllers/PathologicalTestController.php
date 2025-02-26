@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PathologicalTest;
 use Illuminate\Http\Request;
+use PHPUnit\Event\Code\Test;
 use Validator;
 use Toastr;
 
@@ -140,4 +141,21 @@ class PathologicalTestController extends Controller
             return redirect()->back();
         }
     }
+
+    public function getTestDetails($id)
+    {
+        $test = PathologicalTest::find($id);
+
+        // Check if the test exists
+        if ($test) {
+            return response()->json([
+                'name' => $test->name,  // Name of the test
+                'price' => $test->price, // Price of the test
+                'description' => $test->description, // Optional: add description or other fields
+            ]);
+        } else {
+            return response()->json(['error' => 'Pathological Test not found'], 404);
+        }
+    }
+
 }

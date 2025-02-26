@@ -219,7 +219,7 @@ class SalesController extends Controller
             $medicine = Medicine::find($saleDetail->medicine_id);
             if ($medicine) {
                 $medicine->stock += $saleDetail->quantity; // Restore the stock
-                $medicine->save(); // Save the updated stock
+                $medicine->save(); 
             }
 
             // Delete the SalesDetail record

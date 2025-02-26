@@ -138,6 +138,29 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-flask"></i>
+                        <p>
+                           Pathological Test Sale
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('test-sales.create')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Test Sale Create</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('test-sales.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Test sale view</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <!--Customer Start-->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
